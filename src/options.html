@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>BucketSpy - 設定</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: #f8f9fa;
+      color: #212529;
+    }
+
+    .container {
+      background: white;
+      border-radius: 8px;
+      padding: 32px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .header {
+      margin-bottom: 32px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #e9ecef;
+    }
+
+    .title {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 0 0 8px 0;
+    }
+
+    .subtitle {
+      color: #6c757d;
+      margin: 0;
+    }
+
+    .section {
+      margin-bottom: 32px;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 500;
+      margin: 0 0 16px 0;
+      color: #495057;
+    }
+
+    .option {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px;
+      border: 1px solid #dee2e6;
+      border-radius: 6px;
+      margin-bottom: 12px;
+      background: #f8f9fa;
+    }
+
+    .option-info {
+      flex: 1;
+    }
+
+    .option-title {
+      font-weight: 500;
+      margin: 0 0 4px 0;
+    }
+
+    .option-description {
+      font-size: 14px;
+      color: #6c757d;
+      margin: 0;
+    }
+
+    .toggle-switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 24px;
+    }
+
+    .toggle-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 24px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider {
+      background-color: #007bff;
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(26px);
+    }
+
+    .status-message {
+      padding: 12px 16px;
+      border-radius: 6px;
+      margin-top: 16px;
+      font-size: 14px;
+    }
+
+    .status-message.success {
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
+    .info-section {
+      background-color: #e7f3ff;
+      border: 1px solid #b8daff;
+      border-radius: 6px;
+      padding: 16px;
+      margin-top: 24px;
+    }
+
+    .info-title {
+      font-weight: 500;
+      margin: 0 0 8px 0;
+      color: #0c5460;
+    }
+
+    .info-text {
+      margin: 0;
+      font-size: 14px;
+      color: #0c5460;
+      line-height: 1.5;
+    }
+
+    .pattern-example {
+      background-color: #f8f9fa;
+      border: 1px solid #dee2e6;
+      border-radius: 4px;
+      padding: 8px 12px;
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      margin: 8px 0;
+      color: #495057;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 class="title">BucketSpy Config</h1>
+      <p class="subtitle">Manage S3 request monitoring settings</p>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">Basic Settings</h2>
+
+      <div class="option">
+        <div class="option-info">
+          <h3 class="option-title">S3 Request Monitoring</h3>
+          <p class="option-description">
+            Enables monitoring of S3 requests. Disabling will stop request detection and badge display.
+          </p>
+        </div>
+        <label class="toggle-switch">
+          <input type="checkbox" id="enableMonitoring" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="option">
+        <div class="option-info">
+          <h3 class="option-title">Badge Display</h3>
+          <p class="option-description">
+            Displays a badge with the number of requests on the extension icon.
+          </p>
+        </div>
+        <label class="toggle-switch">
+          <input type="checkbox" id="showBadge" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="info-section">
+      <h3 class="info-title">Monitoring Targets</h3>
+      <p class="info-text">
+        This extension monitors S3 requests that match the following pattern:
+      </p>
+      <div class="pattern-example">
+        https://*.s3-*.amazonaws.com/*
+      </div>
+      <p class="info-text">
+        e.g. https://mybucket.s3-ap-northeast-1.amazonaws.com/path/to/file.jpg
+      </p>
+    </div>
+
+    <div class="info-section">
+      <h3 class="info-title">Privacy Policy</h3>
+      <p class="info-text">
+        This extension saves information about detected S3 requests locally and does not send it externally.
+        The request history is cleared when the browser is closed or the page is refreshed.
+      </p>
+    </div>
+
+    <div id="statusMessage"></div>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>
