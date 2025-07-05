@@ -12,11 +12,6 @@
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "biomejs.biome"
   },
-  "files.exclude": {
-    "**/node_modules": true,
-    "**/dist": true,
-    "**/.git": true
-  },
   "search.exclude": {
     "**/node_modules": true,
     "**/dist": true
