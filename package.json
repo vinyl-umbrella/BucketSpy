@@ -12,13 +12,13 @@
     "clean": "rm -rf dist",
     "watch:chrome": "nodemon --watch . --ext js,html,json,png --ignore dist --ignore node_modules --exec \"npm run build:chrome\"",
     "watch:firefox": "nodemon --watch . --ext js,html,json,png --ignore dist --ignore node_modules --exec \"npm run build:firefox\"",
-    "copy:chrome": "mkdir -p 'dist/chrome'; cp 'src/manifest.json' 'dist/chrome/'; cp 'src/background.js' 'dist/chrome/background.js'; cp 'src/popup.*' 'dist/chrome/'; cp 'src/options.*' 'dist/chrome/'; cp -r 'icons' 'dist/chrome/'",
-    "copy:firefox": "mkdir -p 'dist/firefox'; cp 'src/manifest-firefox.json' 'dist/firefox/manifest.json'; cp 'src/background.js' 'dist/firefox/background.js'; cp 'src/popup.*' 'dist/firefox/'; cp 'src/options.*' 'dist/firefox/'; cp -r 'icons' 'dist/firefox/'",
-    "lint": "biome lint src/background.js src/popup.js src/options.js",
-    "lint:fix": "biome lint --write src/background.js src/popup.js src/options.js",
-    "format": "biome format --write src/background.js src/popup.js src/options.js src/popup.html src/options.html src/manifest.json src/manifest-firefox.json",
-    "check": "biome check src/background.js src/popup.js src/options.js src/popup.html src/options.html src/manifest.json src/manifest-firefox.json",
-    "check:fix": "biome check --write src/background.js src/popup.js src/options.js src/popup.html src/options.html src/manifest.json src/manifest-firefox.json"
+    "copy:chrome": "mkdir -p dist/chrome && cp src/manifest.json src/background.js src/popup.* src/options.* dist/chrome/ && cp -r icons dist/chrome/",
+    "copy:firefox": "mkdir -p dist/firefox && cp src/manifest-firefox.json dist/firefox/manifest.json && cp src/background.js src/popup.* src/options.* dist/firefox/ && cp -r icons dist/firefox/",
+    "lint": "biome lint src/*.js",
+    "lint:fix": "biome lint --write src/*.js",
+    "format": "biome format --write src/*.{js,html,json}",
+    "check": "biome check src/*.{js,html,json}",
+    "check:fix": "biome check --write src/*.{js,html,json}"
   },
   "devDependencies": {
     "@biomejs/biome": "2.0.6",
