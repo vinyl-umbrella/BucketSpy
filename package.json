@@ -1,0 +1,17 @@
+{
+  "name": "bucketspy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "background-firefox.js",
+  "scripts": {
+    "lint": "biome lint src/background.js src/background-firefox.js src/popup.js src/options.js",
+    "lint:fix": "biome lint --write src/background.js src/background-firefox.js src/popup.js src/options.js",
+    "format": "biome format --write src/background.js src/background-firefox.js src/popup.js src/options.js src/popup.html src/options.html src/manifest.json src/manifest-firefox.json",
+    "check": "biome check src/background.js src/background-firefox.js src/popup.js src/options.js src/popup.html src/options.html src/manifest.json src/manifest-firefox.json",
+    "check:fix": "biome check --write src/background.js src/background-firefox.js src/popup.js src/options.js src/popup.html src/options.html src/manifest.json src/manifest-firefox.json"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.0.6",
+    "nodemon": "^3.0.2"
+  }
+}
